@@ -1,4 +1,5 @@
-"""Paint, for drawing shapes.
+""" Juego que se encarga de dibujar figuras o lineas dependiendo de lo que ingrese el usuario
+Paint, for drawing shapes.
 
 Exercises
 
@@ -13,7 +14,7 @@ from turtle import *
 
 from freegames import vector
 
-
+# Dibuja una linea despues de recibir una l
 def line(start, end):
     """Draw line from start to end."""
     up()
@@ -21,7 +22,7 @@ def line(start, end):
     down()
     goto(end.x, end.y)
 
-
+# Dibuja una cuadrado despues de recibir una s
 def square(start, end):
     """Draw square from start to end."""
     up()
@@ -35,7 +36,7 @@ def square(start, end):
 
     end_fill()
 
-
+# Dibuja un circulo despues de recibir una c
 def circle(start, end):
     """Draw circle from start to end."""
     up()
@@ -49,7 +50,7 @@ def circle(start, end):
 
     end_fill()
 
-
+# Dibuja un rectangulo despues de recibir una r
 def rectangle(start, end):
     """Draw rectangle from start to end."""
     up()
@@ -66,12 +67,21 @@ def rectangle(start, end):
 
     end_fill()
 
-
+# Dibuja un triangulo despues de recibir una t
 def triangle(start, end):
     """Draw triangle from start to end."""
-    pass  # TODO
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
 
+    for count in range(3):
+        forward(end.x - start.x)
+        left(120)
 
+    end_fill()
+
+# Se encarga de recibir las coordenadas del del punto de inicio 
 def tap(x, y):
     """Store starting point or draw shape."""
     start = state['start']
@@ -84,7 +94,7 @@ def tap(x, y):
         shape(start, end)
         state['start'] = None
 
-
+# Actualiza el estado para dibujar diferentes figuras
 def store(key, value):
     """Store value in state at key."""
     state[key] = value
