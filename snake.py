@@ -6,19 +6,25 @@ import random
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
+
+# Lista que nos ayuda a elegir entre estos colores para la comida y la snake
 color = ['blue', 'yellow', 'pink', 'green', 'purple']
+# Denominacion del color de la comida y la snake
 foodC = random.choice(color)
 snakeC = random.choice(color)
 
+# Funcion encargada del cambio de direccion
 def change(x, y):
     "Change snake direction."
     aim.x = x
     aim.y = y
 
+# Funcion que checa si la snake se encuentra dentro de los limites del juego
 def inside(head):
     "Return True if head inside boundaries."
     return -200 < head.x < 190 and -200 < head.y < 190
 
+# Funcion encargada del movimiemto 
 def move():
     "Move snake forward one segment."
     head = snake[-1].copy()
@@ -47,6 +53,7 @@ def move():
     update()
     ontimer(move, 100)
 
+# Linea de codigo que comprueba que la snake y su comida no sean del mismo color
 if (snakeC == foodC):
     snakeC = random.choice(color)
 
