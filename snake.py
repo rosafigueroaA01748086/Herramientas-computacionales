@@ -53,6 +53,26 @@ def move():
     update()
     ontimer(move, 100)
 
+# Funcion para que se mueva la comida
+def move_food():
+    """Move food randomly one step at a time without going outside the window."""
+    global food
+
+    # Se generan direcciones random
+    dx = randrange(-10, 11, 10)
+    dy = randrange(-10, 11, 10)
+
+    # Se calcula la nueva posición de la comida
+    new_food = food + vector(dx, dy)
+
+    # Ver si la nueva posición(new_food) está dentro de los límites
+    if inside(new_food):
+        food = new_food
+
+    # Tiempo para el siguiente movimiento
+    ontimer(move_food, 500)
+    
+
 # Linea de codigo que comprueba que la snake y su comida no sean del mismo color
 if (snakeC == foodC):
     snakeC = random.choice(color)
@@ -65,5 +85,6 @@ onkey(lambda: change(10, 0), 'Right')
 onkey(lambda: change(-10, 0), 'Left')
 onkey(lambda: change(0, 10), 'Up')
 onkey(lambda: change(0, -10), 'Down')
+move_food()
 move()
 done()

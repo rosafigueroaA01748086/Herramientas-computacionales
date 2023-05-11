@@ -36,6 +36,7 @@ tiles = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ]
 
+# Funcion que dibuja un cuadrado usando path en x, y
 def square(x, y):
     "Draw square using path at (x, y)."
     path.up()
@@ -49,6 +50,7 @@ def square(x, y):
 
     path.end_fill()
 
+# Funcion que devuele el desplazamiento del punto en tiles
 def offset(point):
     "Return offset of point in tiles."
     x = (floor(point.x, 20) + 200) / 20
@@ -56,6 +58,7 @@ def offset(point):
     index = int(x + y * 20)
     return index
 
+# Funcion que devuelve True si se puede mover dentro del mapa tiles
 def valid(point):
     "Return True if point is valid in tiles."
     index = offset(point)
@@ -70,6 +73,7 @@ def valid(point):
 
     return point.x % 20 == 0 or point.y % 20 == 0
 
+# Funcion que dibuja la mapa usando path
 def world():
     "Draw world using path."
     bgcolor('black')
@@ -88,6 +92,7 @@ def world():
                 path.goto(x + 10, y + 10)
                 path.dot(2, 'white')
 
+# Funcion de movimiento
 def move():
     "Move pacman and all ghosts."
     writer.undo()
@@ -97,9 +102,7 @@ def move():
 
     if valid(pacman + aim):
         pacman.move(aim)
-
-
-    index = offset(pacman)
+        index = offset(pacman)
 
     if tiles[index] == 1:
         tiles[index] = 2
@@ -120,8 +123,7 @@ def move():
                 vector(5, 0),
                 vector(-5, 0),
                 vector(0, 5),
-                vector(0, -5)
-            ]
+                vector(0, -5)]
             plan = choice(options)
             course.x = plan.x
             course.y = plan.y
@@ -137,14 +139,12 @@ def move():
                 return
     ontimer(move, 50)
 
-
+# Funcion encargada en cambiar el objetivo de pacman si es válido
 def change(x, y):
     "Change pacman aim if valid."
     if valid(pacman + vector(x, y)):
         aim.x = x
         aim.y = y
-
-
 
 setup(420, 420, 370, 0)
 hideturtle()
@@ -157,6 +157,7 @@ onkey(lambda: change(5, 0), 'Right')
 onkey(lambda: change(-5, 0), 'Left')
 onkey(lambda: change(0, 5), 'Up')
 onkey(lambda: change(0, -5), 'Down')
+
 if change(5, 0): # derecha
     for point, course in ghosts:
         if valid(point + course):
@@ -202,7 +203,9 @@ else:
         goto(point.x + 10, point.y + 10)
         dot(20, 'red')
 world()
-move()           
-
-
+move()
 done()
+
+
+
+
