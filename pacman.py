@@ -58,7 +58,7 @@ def offset(point):
     index = int(x + y * 20)
     return index
 
-# Funcion que devuelve True si se puede mover dentro del mapa tiles
+# Funcion que devuelve True si los puntos se encuentrar en tiles
 def valid(point):
     "Return True if point is valid in tiles."
     index = offset(point)
@@ -102,7 +102,8 @@ def move():
 
     if valid(pacman + aim):
         pacman.move(aim)
-        index = offset(pacman)
+
+    index = offset(pacman)
 
     if tiles[index] == 1:
         tiles[index] = 2
@@ -123,7 +124,8 @@ def move():
                 vector(5, 0),
                 vector(-5, 0),
                 vector(0, 5),
-                vector(0, -5)]
+                vector(0, -5),
+            ]
             plan = choice(options)
             course.x = plan.x
             course.y = plan.y
@@ -135,9 +137,10 @@ def move():
     update()
 
     for point, course in ghosts:
-            if abs(pacman - point) < 20:
-                return
-    ontimer(move, 50)
+        if abs(pacman - point) < 20:
+            return
+
+    ontimer(move, 100)
 
 # Funcion encargada en cambiar el objetivo de pacman si es válido
 def change(x, y):
@@ -157,7 +160,6 @@ onkey(lambda: change(5, 0), 'Right')
 onkey(lambda: change(-5, 0), 'Left')
 onkey(lambda: change(0, 5), 'Up')
 onkey(lambda: change(0, -5), 'Down')
-
 if change(5, 0): # derecha
     for point, course in ghosts:
         if valid(point + course):
@@ -205,7 +207,3 @@ else:
 world()
 move()
 done()
-
-
-
-
