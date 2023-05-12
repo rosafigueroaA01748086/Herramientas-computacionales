@@ -36,9 +36,8 @@ tiles = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ]
 
-# Funcion que dibuja un cuadrado usando path en x, y
 def square(x, y):
-    "Draw square using path at (x, y)."
+    "Función square(x, y) se encarga de dibujar un cuadrado usando path en x, y. La función solicta una parametro x y uno y."
     path.up()
     path.goto(x, y)
     path.down()
@@ -50,17 +49,16 @@ def square(x, y):
 
     path.end_fill()
 
-# Funcion que devuele el desplazamiento del punto en tiles
 def offset(point):
-    "Return offset of point in tiles."
+    "Función que devuele el desplazamiento del punto dentro del mapa. La función solicita un punto como input."
     x = (floor(point.x, 20) + 200) / 20
     y = (180 - floor(point.y, 20)) / 20
     index = int(x + y * 20)
     return index
 
-# Funcion que devuelve True si los puntos se encuentrar en tiles
+
 def valid(point):
-    "Return True if point is valid in tiles."
+    "Funcion que devuelve True si los puntos donde se encuentra el pacman sí son parte del mapa. Solica un parametro de entrada tipo punto."
     index = offset(point)
 
     if tiles[index] == 0:
@@ -73,9 +71,8 @@ def valid(point):
 
     return point.x % 20 == 0 or point.y % 20 == 0
 
-# Funcion que dibuja la mapa usando path
 def world():
-    "Draw world using path."
+    "Función que dibuja el mapa usando path. No solicita ningun parámetro de entrada."
     bgcolor('black')
     path.color('blue')
 
@@ -92,9 +89,51 @@ def world():
                 path.goto(x + 10, y + 10)
                 path.dot(2, 'white')
 
-# Funcion de movimiento
+def moveInt():
+    '''Funcion que se encarga de hacer que los fantasmas tenga un movimiento mas inteligente. No requiere parametros de entrada.'''
+    if change(5, 0): # derecha
+        course.x = 5
+        course.y = 0
+        if valid(point + course):
+            point.move(course)
+            
+        up()
+        goto(point.x + 10, point.y + 10)
+        dot(20, 'red')
+        
+    elif change(-5, 0): # izquierda
+        course.x = -5
+        course.y = 0
+        if valid(point + course):
+            point.move(course)
+            
+        up()
+        goto(point.x + 10, point.y + 10)
+        dot(20, 'red')
+    elif change(0, 5): # izquierda
+        course.x = 0
+        course.y = 5
+        if valid(point + course):
+            point.move(course)
+            
+        up()
+        goto(point.x + 10, point.y + 10)
+        dot(20, 'red')
+            
+    else:
+        for point, course in ghosts:
+            if valid(point + course):
+                point.move(course)
+            else:
+                course.x = 0
+                course.y = -5
+
+            up()
+            goto(point.x + 10, point.y + 10)
+            
+
 def move():
-    "Move pacman and all ghosts."
+    "Función encargada del movimiento del pacman y los fantasmas. No solicta ningun parámetro de entrada."
     writer.undo()
     writer.write(state['score'])
 
@@ -124,7 +163,7 @@ def move():
                 vector(5, 0),
                 vector(-5, 0),
                 vector(0, 5),
-                vector(0, -5),
+                vector(0, -5)
             ]
             plan = choice(options)
             course.x = plan.x
@@ -142,9 +181,8 @@ def move():
 
     ontimer(move, 100)
 
-# Funcion encargada en cambiar el objetivo de pacman si es válido
 def change(x, y):
-    "Change pacman aim if valid."
+    "Función encargada de cambiar la dirección en la que se mueve el pacman si se encuentra un camino válido"
     if valid(pacman + vector(x, y)):
         aim.x = x
         aim.y = y
@@ -160,50 +198,7 @@ onkey(lambda: change(5, 0), 'Right')
 onkey(lambda: change(-5, 0), 'Left')
 onkey(lambda: change(0, 5), 'Up')
 onkey(lambda: change(0, -5), 'Down')
-if change(5, 0): # derecha
-    for point, course in ghosts:
-        if valid(point + course):
-            point.move(course)
-        else:
-            course.x = 5
-            course.y = 0
-
-        up()
-        goto(point.x + 10, point.y + 10)
-        dot(20, 'red')
-elif change(-5, 0): # izquierda
-    for point, course in ghosts:
-        if valid(point + course):
-            point.move(course)
-        else:
-            course.x = -5
-            course.y = 0
-
-        up()
-        goto(point.x + 10, point.y + 10)
-        dot(20, 'red')
-elif change(0, 5): # izquierda
-    for point, course in ghosts:
-        if valid(point + course):
-            point.move(course)
-        else:
-            course.x = 0
-            course.y = 5
-
-        up()
-        goto(point.x + 10, point.y + 10)
-        dot(20, 'red')
-else:
-    for point, course in ghosts:
-        if valid(point + course):
-            point.move(course)
-        else:
-            course.x = 0
-            course.y = -5
-
-        up()
-        goto(point.x + 10, point.y + 10)
-        dot(20, 'red')
 world()
+moveInt()
 move()
 done()
