@@ -7,7 +7,7 @@ speed = vector(0, 0)
 targets = []
 
 def tap(x, y):
-    "Respond to screen tap."
+    "Función que se encarga de responde al tap del usuario. No requiere ningun valor de entrada."
     if not inside(ball):
         # Comprobar si la pelota está fuera de la pantalla
         ball.x = -199
@@ -16,11 +16,11 @@ def tap(x, y):
         speed.y = (y + 300) / 25
 
 def inside(xy):
-    "Return True if xy within screen."
+    "Función que se encarga de regresar el valor True si xy esta dentro de la pantalla. Requiere un valor de entrada xy."
     return -200 < xy.x < 200 and -200 < xy.y < 200
 
 def draw():
-    "Draw ball and targets."
+    "Función que se encarga de dibujar la pelota y los targets. No requiere ningun valor de entrada. "
     clear()
 
     # Se dibuja el objeto
@@ -37,7 +37,7 @@ def draw():
     update()
 
 def move():
-    "Move ball and targets."
+    "Función que se encarga del movimiento de la pelota y de los targets. NO requiere ningun valor de entrada. "
 
     # Se generan los objetos aleatoria
     if randrange(40) == 0:

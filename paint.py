@@ -14,17 +14,16 @@ from turtle import *
 
 from freegames import vector
 
-# Dibuja una linea despues de recibir una l
+
 def line(start, end):
-    """Draw line from start to end."""
+    """Dibuja una linea despues de recibir un punto de inicio y un punto de final. Requiere dos parámetros el punto de inicio y final."""
     up()
     goto(start.x, start.y)
     down()
     goto(end.x, end.y)
 
-# Dibuja una cuadrado despues de recibir una s
 def square(start, end):
-    """Draw square from start to end."""
+    """Dibuja una cuadrado de inicio a fin. Requiere dos parámetros un punto de inicio y final."""
     up()
     goto(start.x, start.y)
     down()
@@ -36,9 +35,8 @@ def square(start, end):
 
     end_fill()
 
-# Dibuja un circulo despues de recibir una c
 def circle(start, end):
-    """Draw circle from start to end."""
+    """Dibuja un circulo de inicio a fin. Requiere dos parámetros el de inicio y final."""
     up()
     goto(start.x, start.y)
     down()
@@ -50,9 +48,8 @@ def circle(start, end):
 
     end_fill()
 
-# Dibuja un rectangulo despues de recibir una r
 def rectangle(start, end):
-    """Draw rectangle from start to end."""
+    """Dibuja un rectangulo de inicio a fin. Requiere dos parámetros un punto de inicio otro de final."""
     up()
     goto(start.x, start.y)
     down()
@@ -67,9 +64,8 @@ def rectangle(start, end):
 
     end_fill()
 
-# Dibuja un triangulo despues de recibir una t
 def triangle(start, end):
-    """Draw triangle from start to end."""
+    """Dibuja un triangulo completo. Requiere dos parámetros el punto de inicio o de fin. """
     up()
     goto(start.x, start.y)
     down()
@@ -81,9 +77,8 @@ def triangle(start, end):
 
     end_fill()
 
-# Se encarga de recibir las coordenadas del del punto de inicio 
 def tap(x, y):
-    """Store starting point or draw shape."""
+    """Se encarga de recibir las coordenadas del del punto de inicio y dibujar una figura o linea.Requiere dos parámetros una x y otra y. """
     # Actualización del estado
     start = state['start']
 
@@ -96,9 +91,8 @@ def tap(x, y):
         shape(start, end)
         state['start'] = None
 
-# Actualiza el estado para dibujar diferentes figuras
 def store(key, value):
-    """Store value in state at key."""
+    """Actualiza el estado para dibujar diferentes figuras"""
     state[key] = value
     # Por ejemplo:
     # store('shape', square)

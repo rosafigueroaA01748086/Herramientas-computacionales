@@ -18,9 +18,8 @@ hide = [True] * 64
 taps = []
 disp = []
 
-# Funcion que dibuja un cuadro blanco con un contorno negro
 def square(x, y):
-    """Draw white square with black outline at (x, y)."""
+    """Funcion que dibuja un cuadro blanco con un contorno negro en el punto indicado. Requiere dos parámetros uno de x y otro de y."""
     up()
     goto(x, y)
     down()
@@ -32,19 +31,17 @@ def square(x, y):
         left(90)
     end_fill()
 
-# Funcion que convierte las coordenadas en los tiles index
 def index(x, y):
-    """Convert (x, y) coordinates to tiles index."""
+    """ Funcion que convierte las coordenadas en los tiles index. Requiere dos parámetros uno de x y otro de y."""
     return int((x + 200) // 50 + ((y + 200) // 50) * 8)
 
-# Funcion que convierte los tiles en coordenadas
 def xy(count):
-    """Convert tiles count to (x, y) coordinates."""
+    """ Funcion que convierte los tiles en coordenadas. Requiere un parámetro."""
     return (count % 8) * 50 - 200, (count // 8) * 50 - 200
 
-# Funcion encargada en actualizar los tiles marcadas y ocultos al tocar
+
 def tap(x, y):
-    """Update mark and hidden tiles based on tap."""
+    """ Funcion encargada en actualizar los tiles marcados y ocultarlos en respuesta al tap realizado por el usuario. Requiere dos parámetros uno de x y y que marca la tarjeta selecionada."""
     spot = index(x, y)
 
     # Se actualiza la marca y los tiles ocultos
@@ -71,9 +68,8 @@ def tap(x, y):
             title('LO LOGRASTE')
 
 
-# Funcion que dibuja los tiles y la imagen
 def draw():
-    """Draw image and tiles."""
+    """Funcion que dibuja los tiles y la imagen. No requiere de ningun parámetro de entrada. """
     clear()
     goto(0, 0)
     # se dibuja la imagen del coche
