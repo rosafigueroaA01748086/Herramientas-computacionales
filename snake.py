@@ -13,20 +13,17 @@ color = ['blue', 'yellow', 'pink', 'green', 'purple']
 foodC = random.choice(color)
 snakeC = random.choice(color)
 
-# Funcion encargada del cambio de direccion
 def change(x, y):
-    "Change snake direction."
+    "Función encargada del cambio de direccion. Solicita 2 parámetros x y y."
     aim.x = x
     aim.y = y
 
-# Funcion que checa si la snake se encuentra dentro de los limites del juego
 def inside(head):
-    "Return True if head inside boundaries."
+    "Función que checa si la cabeza de la serpiente se encuentra dentro de los limites del mapa. Solicita un tipo punto donde se encuentre la cabeza de la serpiente."
     return -200 < head.x < 190 and -200 < head.y < 190
 
-# Funcion encargada del movimiemto 
 def move():
-    "Move snake forward one segment."
+    "Función que se encarga del movimiento de la serpiente. No requiere ningun parámetro de entrada."
     head = snake[-1].copy()
     head.move(aim)
 
@@ -53,9 +50,8 @@ def move():
     update()
     ontimer(move, 100)
 
-# Funcion para que se mueva la comida
 def move_food():
-    """Move food randomly one step at a time without going outside the window."""
+    """función que mueve de forma aleatoria un paso a la vez la comida, sin que esta salga del rango del mapa. No solicita ningun parámetro de entrada."""
     global food
 
     # Se generan direcciones random
@@ -72,13 +68,15 @@ def move_food():
     # Tiempo para el siguiente movimiento
     ontimer(move_food, 500)
     
+def differentColor(foodC, snakeC):
+    '''Función que se encarga de checar que el color si el color de la serpiente y de su comida es igual y cambiarlo. Requiere 2 parametros de entrada el color de la serpiente y el color de la comida.'''
+    if (snakeC == foodC):
+        snakeC = random.choice(color)
 
-# Linea de codigo que comprueba que la snake y su comida no sean del mismo color
-if (snakeC == foodC):
-    snakeC = random.choice(color)
 
 setup(420, 420, 370, 0)
 hideturtle()
+differentColor(foodC, snak)
 tracer(False)
 listen()
 onkey(lambda: change(10, 0), 'Right')
