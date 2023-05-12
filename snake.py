@@ -76,7 +76,7 @@ def differentColor(foodC, snakeC):
 
 setup(420, 420, 370, 0)
 hideturtle()
-differentColor(foodC, snak)
+differentColor(foodC, snakeC)
 tracer(False)
 listen()
 onkey(lambda: change(10, 0), 'Right')
