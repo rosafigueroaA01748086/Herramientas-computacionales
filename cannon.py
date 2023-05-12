@@ -9,6 +9,7 @@ targets = []
 def tap(x, y):
     "Respond to screen tap."
     if not inside(ball):
+        # Comprobar si la pelota está fuera de la pantalla
         ball.x = -199
         ball.y = -199
         speed.x = (x + 300) / 25
@@ -22,39 +23,50 @@ def draw():
     "Draw ball and targets."
     clear()
 
+    # Se dibuja el objeto
     for target in targets:
         goto(target.x, target.y)
         dot(20, 'blue')
 
+    # Se dibuja la pelota
     if inside(ball):
         goto(ball.x, ball.y)
         dot(6, 'red')
 
+    # Se actualiza la pantalla
     update()
 
 def move():
     "Move ball and targets."
+
+    # Se generan los objetos aleatoria
     if randrange(40) == 0:
         y = randrange(-150, 150)
         target = vector(200, y)
         targets.append(target)
 
+    # Movimiento de los objetos que ya se encuentran dentro de la pantalla
     for target in targets:
         target.x -= 2.5
 
+    # Movimiento de la pelota
     if inside(ball):
         speed.y -= 0.5
         ball.move(speed)
 
+    # Colisión entre la pelota y los objetos
     dupe = targets.copy()
     targets.clear()
 
     for target in dupe:
+        # Si la distancia entre el objeto y la pelota es mayor que 13, 
+        # no se ocurre la colisión y el objeto se agrega de nuevo a la lista
         if abs(target - ball) > 13:
             targets.append(target)
 
     draw()
 
+    # Reaparecen los objetos que se salieron de la pantalla
     for target in targets:
         if not inside(target):
             target.x = 200

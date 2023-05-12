@@ -84,11 +84,13 @@ def triangle(start, end):
 # Se encarga de recibir las coordenadas del del punto de inicio 
 def tap(x, y):
     """Store starting point or draw shape."""
+    # Actualización del estado
     start = state['start']
 
     if start is None:
         state['start'] = vector(x, y)
     else:
+        # Se obtiene la función de dibujo correspondiente almacenada en state['state']
         shape = state['shape']
         end = vector(x, y)
         shape(start, end)
@@ -98,7 +100,8 @@ def tap(x, y):
 def store(key, value):
     """Store value in state at key."""
     state[key] = value
-
+    # Por ejemplo:
+    # store('shape', square)
 
 state = {'start': None, 'shape': line}
 setup(420, 420, 370, 0)
