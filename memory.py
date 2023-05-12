@@ -1,4 +1,3 @@
-
 from random import *
 from turtle import *
 
@@ -8,6 +7,8 @@ car = path('car.gif')
 tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
+taps = []
+disp = []
 
 # Funcion que dibuja un cuadro blanco con un contorno negro
 def square(x, y):
@@ -37,13 +38,19 @@ def tap(x, y):
     """Update mark and hidden tiles based on tap."""
     spot = index(x, y)
     mark = state['mark']
-
+    taps.append(1)
+    print('Taps:', len(taps))
+    title(len(taps))
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
     else:
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
+        disp.append(1)
+        print(len(disp))
+        if len(disp) == 32:
+            title('LO LOGRASTE')
 
 
 # Funcion que dibuja los tiles y la imagen
