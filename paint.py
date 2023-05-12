@@ -45,7 +45,7 @@ def circle(start, end):
     begin_fill()
 
     for count in range(20):
-        circle(end.x - start.x)
+        forward(end.x - start.x)
         left(18) #Ángulo exterior 360/n n=20
 
     end_fill()
