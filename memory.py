@@ -4,7 +4,15 @@ from turtle import *
 from freegames import path
 
 car = path('car.gif')
-tiles = list(range(32)) * 2
+#tiles = list(range(32)) * 2
+letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+           'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+           'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+           'Y', 'Z', '*', '#', '$', '%', '&', '?',
+           'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+           'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+           'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+           'Y', 'Z', '*', '#', '$', '%', '&', '?',]
 state = {'mark': None}
 hide = [True] * 64
 taps = []
@@ -41,7 +49,7 @@ def tap(x, y):
     taps.append(1)
     print('Taps:', len(taps))
     title(len(taps))
-    if mark is None or mark == spot or tiles[mark] != tiles[spot]:
+    if mark is None or mark == spot or letters[mark] != letters[spot]:
         state['mark'] = spot
     else:
         hide[spot] = False
@@ -73,13 +81,13 @@ def draw():
         up()
         goto(x + 27, y)
         color('black')
-        write(tiles[mark], align="center", font=('Arial', 30, 'normal'))
+        write(letters[mark], align="center", font=('Arial', 30, 'normal'))
 
     update()
     ontimer(draw, 100)
 
 
-shuffle(tiles)
+shuffle(letters)
 setup(420, 420, 370, 0)
 addshape(car)
 hideturtle()
