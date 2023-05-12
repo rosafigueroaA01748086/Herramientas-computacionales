@@ -10,5 +10,6 @@ Actividades:
 4. Juego del Tiro Parabólico    cannon.py
 5. Juego de Memoria             memory.py
 
-Instalación de las herramientas:
+Instalación de las herramientas para el videojuego:
 https://grantjenks.com/docs/freegames/
+
