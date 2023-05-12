@@ -7,7 +7,6 @@ food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 
-
 # Lista que nos ayuda a elegir entre estos colores para la comida y la snake
 color = ['blue', 'yellow', 'pink', 'green', 'purple']
 # Denominacion del color de la comida y la snake
@@ -23,7 +22,6 @@ def inside(head):
     "Función que checa si la cabeza de la serpiente se encuentra dentro de los limites del mapa. Solicita un tipo punto donde se encuentre la cabeza de la serpiente."
     return -200 < head.x < 190 and -200 < head.y < 190
 
-# Funcion encargada del movimiemto 
 def move():
     "Función que se encarga del movimiento de la serpiente. No requiere ningun parámetro de entrada."
     head = snake[-1].copy()
@@ -52,7 +50,6 @@ def move():
     update()
     ontimer(move, 100)
 
-# Funcion para que se mueva la comida
 def move_food():
     """función que mueve de forma aleatoria un paso a la vez la comida, sin que esta salga del rango del mapa. No solicita ningun parámetro de entrada."""
     global food
@@ -79,7 +76,7 @@ def differentColor(foodC, snakeC):
 
 setup(420, 420, 370, 0)
 hideturtle()
-differentColor(foodC, snakeC)
+differentColor(foodC, snak)
 tracer(False)
 listen()
 onkey(lambda: change(10, 0), 'Right')
